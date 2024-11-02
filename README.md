@@ -60,3 +60,14 @@ void pop(int *stack, int *top){
     printf("Item popped: %d\n", retval);
 }
 ```
+
+### Differences
+
+||Menu-driven|Dynamic|
+|:---:|:---|:---|
+|```size``` initialization|```#define size 5```|```int size = 5;```|
+|```Push``` & ```Pop``` parameters|Push: ```item, stack[], *top``` <br> Pop: ```stack[], *top```|Push: ```item, **stack, *top``` <br> Pop: ```*stack, *top```|
+|Overflow notice|```printf("Stack overflow \n):```|```size = size * 2;``` <br> ``` *stack = (int *)realloc(*stack, size*sizeof(int));```|
+|```stack``` initialization|```int stack[size]```|```int* stack = (int *) malloc(size*sizeof(int))```|
+|```push``` & ```pop``` function call|```push(item, stack, &top)``` <br> ```pop(stack, &top)```|```push(item, &stack, &top)``` <br> ```pop(stack, &top)```|
+|case 4|```exit(0);```|```free(stack);``` <br> ```exit(0);```|
