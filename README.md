@@ -71,3 +71,38 @@ void pop(int *stack, int *top){
 |```stack``` initialization|```int stack[size]```|```int* stack = (int *) malloc(size*sizeof(int))```|
 |```push``` & ```pop``` function call|```push(item, stack, &top)``` <br> ```pop(stack, &top)```|```push(item, &stack, &top)``` <br> ```pop(stack, &top)```|
 |case 4|```exit(0);```|```free(stack);``` <br> ```exit(0);```|
+
+## Program 1.3: Multiple Stacks
+
+**Push function** <br>
+Parameters: ```item, i```
+
+```C
+void push(int item, int i){
+    if (top[i] == boundary[i + 1]){
+        printf("Stack %d: Stack overflow \n", i);
+        return;
+    }
+    top[i]++;
+    stack[top[i]] = item;
+    printf("[Stack %d] Item pushed: %d \n", i, item);
+}
+```
+
+**Pop function** <br>
+Parameters: ```i``` <br>
+Return type: ```int```
+
+```C
+int pop(int i){
+    if (top[i] == boundary[i]){
+        printf("Stack %d: Stack underflow \n", i);
+        return -1;
+    }
+    int retval = stack[top[i]];
+    top[i]--;
+    printf("[Stack %d] Item popped: %d \n", i, retval);
+    
+    return retval;
+}
+```
