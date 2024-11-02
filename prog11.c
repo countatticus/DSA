@@ -63,4 +63,5 @@ int main(){
                 printf("Invalid option! Please enter a valid one. \n");
         }
     }
+    return 0;
 }
