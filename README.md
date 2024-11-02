@@ -106,3 +106,38 @@ int pop(int i){
     return retval;
 }
 ```
+
+## Program 1.4: Convert Infix to Postfix
+
+**Infix to Postfix function** <br>
+Parameters: ```infix[], postfix[]```
+
+```C
+void infix_postfix(char infix[], char postfix[]){
+    int j = 0, top = -1;
+    char symbol, stack[size];
+    push('#', stack, &top);
+    int n = strlen(infix);
+    
+    for(int i = 0; i < n; i++){
+        symbol = infix[i];
+        
+        while (stack_precedence(stack[top]) > input_precedence(symbol)){
+            postfix[j] = pop(stack, &top);
+            j++;
+        }
+        
+        if (stack_precedence(stack[top]) != input_precedence(symbol)){
+            push(symbol, stack, &top);
+        } else {
+            pop(stack, &top);
+        }
+    }
+    
+    while(stack[top] != '#'){
+        postfix[j] = pop(stack, &top);
+        j++;
+    }
+    postfix[j] = '\0';
+}
+```
