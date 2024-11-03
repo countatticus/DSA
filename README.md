@@ -141,3 +141,65 @@ void infix_postfix(char infix[], char postfix[]){
     postfix[j] = '\0';
 }
 ```
+
+## Program 1.5: Evaluate postfix/suffix expression
+
+**Evaluate function** <br>
+Parameters: ```postfix[]```
+
+```C
+int evaluate(char postfix[]){
+    int i, n, op1, op2, res, top, stack[size];
+    char symbol;
+    top = -1;
+    n = strlen(postfix);
+    
+    for (i = 0; i < n; i++){
+        symbol = postfix[i];
+        
+        switch(symbol){
+            case '+':
+                op2 = pop(stack, &top);
+                op1 = pop(stack, &top);
+                res = op1 + op2;
+                push(res, stack, &top);
+                break;
+            case '-':
+                op2 = pop(stack, &top);
+                op1 = pop(stack, &top);
+                res = op1 - op2;
+                push(res, stack, &top);
+                break;
+            case '*':
+                op2 = pop(stack, &top);
+                op1 = pop(stack, &top);
+                res = op1 * op2;
+                push(res, stack, &top);
+                break;
+            case '/':
+                op2 = pop(stack, &top);
+                op1 = pop(stack, &top);
+                if (op2 != 0){
+                    res = op1/op2;
+                    push(res, stack, &top);
+                } else {
+                    printf("Error: Division by 0! \n");
+                    return -1;
+                }
+                break;
+            case '^':
+            case '$':
+                op2 = (double) pop(&top, stack);
+                op1 = (double) pop(&top, stack);
+                res = (int)pow(op1, op2);
+                push(res, stack, &top);
+                break;
+            default:
+                push(symbol - '0', stack, &top);
+                break;
+        }
+    }
+    return pop(stack, &top);
+}
+
+```
