@@ -148,20 +148,89 @@ void display(NODE first){
 	
 	temp = first;
 	printf("Student Details: \n");
-	printf("USN\tName\tBranch\tSemester\tPhone no.\n");
+	printf("USN\t\tName\t\tBranch\t\tSemester\t\tPhone no.\n");
 	
 	while (temp != NULL){
 	
 		count++;
-		printf("USN: %s\t", temp -> usn);
-		printf("Name: %s\t", temp -> name);
-		printf("Branch: %s\t", temp -> branch);
-		printf("Semester: %d\t", temp -> sem);
-		printf("Phone no. +91%s\n", temp -> phoneno);
+		printf("%s\t\t", temp -> usn);
+		printf("%s\t\t", temp -> name);
+		printf("%s\t\t", temp -> branch);
+		printf("%d\t\t", temp -> sem);
+		printf("+91%s\n", temp -> phoneno);
 		
 		temp = temp -> right;
 	}
 	printf("%d Nodes\n", count);
 }
 
+int main(){
+
+	int choice;
+	char usn[10], name[20], branch[5], phoneno[10];
+	int sem;
+	
+	NODE first = NULL;
+	
+	while(1){
+		printf("FRONT: 1. Insert 2. Delete\n");
+		printf("REAR: 3. Insert 4. Delete\n");
+		printf("5. Display \n6. Exit\n");
+		
+		printf("Enter choice: ");
+		scanf("%d", &choice);
+		
+		/*2 ways of accepting user input: 
+		    1. Using scanf("%d", &<variable_name>);: Reads until next whitespace, not best for multiwords
+		    2. Using fgets (name, sizeof(name), stdin): Solves whitespace problem
+		*/
+		
+		switch(choice){
+			case 1:
+				printf("\nEnter details \n\n");
+				printf("USN: ");
+				scanf("%s", usn);
+				printf("Name: ");
+				scanf("%s", name);
+				printf("Branch: ");
+				scanf("%s", branch);
+				printf("Semester: ");
+				scanf("%d", &sem);
+				printf("phoneno: ");
+				scanf("%s", phoneno);
+				
+				first = insert_front(usn, name, branch, sem, phoneno, first);
+				break;
+			case 2:
+				first = del_front(first);
+				break;
+			case 3:
+				printf("\nEnter details \n\n");
+				printf("USN: ");
+				scanf("%s", usn);
+				printf("Name: ");
+				scanf("%s", name);
+				printf("Branch: ");
+				scanf("%s", branch);
+				printf("Semester: ");
+				scanf("%d", &sem);
+				printf("phoneno: ");
+				scanf("%s", phoneno);
+				
+				first = insert_rear(usn, name, branch, sem, phoneno, first);
+				break;
+			case 4:
+				first = del_rear(first);
+				break;
+			case 5: 
+				display(first);
+				break;
+			case 6:
+				exit(0);
+		}
+	}
+	return 0;
+}
+		
+			
 
