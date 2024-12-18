@@ -135,4 +135,33 @@ NODE del_rear(NODE first){
 	free(temp);
 	return first;
 }
+
+void display(NODE first){
+
+	NODE temp;
+	int count = 0;
 	
+	if (first == NULL){
+		printf("Linked List is empty: %d Nodes\n", count);
+		return;
+	}
+	
+	temp = first;
+	printf("Student Details: \n");
+	printf("USN\tName\tBranch\tSemester\tPhone no.\n");
+	
+	while (temp != NULL){
+	
+		count++;
+		printf("USN: %s\t", temp -> usn);
+		printf("Name: %s\t", temp -> name);
+		printf("Branch: %s\t", temp -> branch);
+		printf("Semester: %d\t", temp -> sem);
+		printf("Phone no. +91%s\n", temp -> phoneno);
+		
+		temp = temp -> right;
+	}
+	printf("%d Nodes\n", count);
+}
+
+
