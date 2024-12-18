@@ -3,17 +3,16 @@
 #include<string.h>
 
 typedef struct node{
-	char usn[10];
+	char usn[15];
 	char name[20];
-	char branch[5];
+	char branch[10];
 	int sem;
-	char phoneno[10];
+	char phoneno[15];
 	
 	struct node *right;
 	struct node *left;
 } *NODE;
 
-//Insert Front
 NODE insert_front(char usn[], char name[], char branch[], int sem, char phoneno[], NODE first){
 
 	//create new node
@@ -74,7 +73,7 @@ NODE del_front(NODE first){
 	
 	//only 1 node exists
 	if (first -> right == NULL){
-		printf("Student Details: \n");
+		printf("\nSTUDENT DETAILS (REMOVED): \n");
 		printf("USN: %s \nName: %s\n", first -> usn, first -> name);
 		printf("Branch: %s \nSemester: %d\n", first -> branch, first -> sem);
 		printf("Phone no.: +91%s\n", first -> phoneno);
@@ -88,7 +87,7 @@ NODE del_front(NODE first){
 	temp -> right -> left = NULL;
 	first = first -> right;
 	
-	printf("Student Details: \n");
+	printf("\nSTUDENT DETAILS (REMOVED): \n");
 	printf("USN: %s \nName: %s\n", temp -> usn, temp -> name);
 	printf("Branch: %s \nSemester: %d\n", temp -> branch, temp -> sem);
 	printf("Phone no.: +91%s\n", temp -> phoneno);
@@ -109,7 +108,7 @@ NODE del_rear(NODE first){
 	
 	//only 1 node exists
 	if (first -> right == NULL){
-		printf("Student Details: \n");
+		printf("\nSTUDENT DETAILS (REMOVED): \n");
 		printf("USN: %s \nName: %s\n", first -> usn, first -> name);
 		printf("Branch: %s \nSemester: %d\n", first -> branch, first -> sem);
 		printf("Phone no.: +91%s\n", first -> phoneno);
@@ -127,7 +126,7 @@ NODE del_rear(NODE first){
 	//isolate the last node from the previous one
 	temp -> left -> right = NULL;
 	
-	printf("Student Details: \n");
+	printf("\nSTUDENT DETAILS (REMOVED): \n");
 	printf("USN: %s \nName: %s\n", temp -> usn, temp -> name);
 	printf("Branch: %s \nSemester: %d\n", temp -> branch, temp -> sem);
 	printf("Phone no.: +91%s\n", temp -> phoneno);
@@ -147,32 +146,43 @@ void display(NODE first){
 	}
 	
 	temp = first;
-	printf("Student Details: \n");
-	printf("USN\t\tName\t\tBranch\t\tSemester\t\tPhone no.\n");
+	//printf("Student Details: \n");
+	//printf("USN\t\tName\t\tBranch\t\tSemester\t\tPhone no.\n");
+	
+	 printf("\nSTUDENT DETAILS \n");
+    	printf("%-10s %-20s %-8s %-9s %-15s\n", "USN", "Name", "Branch", "Semester", "Phone no.");
+    	printf("--------------------------------------------------------------------\n");
 	
 	while (temp != NULL){
 	
 		count++;
+		
+		/*
 		printf("%s\t\t", temp -> usn);
 		printf("%s\t\t", temp -> name);
 		printf("%s\t\t", temp -> branch);
 		printf("%d\t\t", temp -> sem);
 		printf("+91%s\n", temp -> phoneno);
+		*/
+		
+		printf("%-10s %-20s %-8s %-9d +91%-15s\n", temp->usn, temp->name, temp->branch, temp->sem, temp->phoneno);
 		
 		temp = temp -> right;
 	}
-	printf("%d Nodes\n", count);
+	printf("--------------------------------------------------------------------\n");
+	printf("%d Node(s)\n", count);
 }
 
 int main(){
 
 	int choice;
-	char usn[10], name[20], branch[5], phoneno[10];
+	char usn[15], name[20], branch[10], phoneno[15];
 	int sem;
 	
 	NODE first = NULL;
 	
 	while(1){
+		printf("\nMenu \n");
 		printf("FRONT: 1. Insert 2. Delete\n");
 		printf("REAR: 3. Insert 4. Delete\n");
 		printf("5. Display \n6. Exit\n");
@@ -187,7 +197,7 @@ int main(){
 		
 		switch(choice){
 			case 1:
-				printf("\nEnter details \n\n");
+				printf("\nENTER STUDENT DETAILS \n");
 				printf("USN: ");
 				scanf("%s", usn);
 				printf("Name: ");
@@ -196,7 +206,7 @@ int main(){
 				scanf("%s", branch);
 				printf("Semester: ");
 				scanf("%d", &sem);
-				printf("phoneno: ");
+				printf("Phone no.: ");
 				scanf("%s", phoneno);
 				
 				first = insert_front(usn, name, branch, sem, phoneno, first);
@@ -205,7 +215,7 @@ int main(){
 				first = del_front(first);
 				break;
 			case 3:
-				printf("\nEnter details \n\n");
+				printf("\nENTER STUDENT DETAILS \n");
 				printf("USN: ");
 				scanf("%s", usn);
 				printf("Name: ");
@@ -214,7 +224,7 @@ int main(){
 				scanf("%s", branch);
 				printf("Semester: ");
 				scanf("%d", &sem);
-				printf("phoneno: ");
+				printf("Phone no.: ");
 				scanf("%s", phoneno);
 				
 				first = insert_rear(usn, name, branch, sem, phoneno, first);
@@ -227,10 +237,8 @@ int main(){
 				break;
 			case 6:
 				exit(0);
+			default: printf("Please enter a valid choice. \n");
 		}
 	}
 	return 0;
 }
-		
-			
-
